@@ -18,7 +18,13 @@ const click_report = document.createElement("div");
 click_report.innerHTML = `Flasks Brewed: ${click_count}`;
 app.append(click_report);
 
-button.onclick = () => {
+const incrementCounter = function() {
     click_count++;
     click_report.innerHTML = `Flasks Brewed: ${click_count}`;
 }
+
+button.onclick = () => {
+  incrementCounter();
+};
+
+const auto_click_interval = setInterval(incrementCounter, 1000);
