@@ -12,3 +12,13 @@ app.append(header);
 const button = document.createElement("button");
 button.innerHTML = "⚗️";
 app.append(button);
+
+let click_count: number = 0;
+const click_report = document.createElement("div");
+click_report.innerHTML = `Flasks Brewed: ${click_count}`;
+app.append(click_report);
+
+button.onclick = () => {
+    click_count++;
+    click_report.innerHTML = `Flasks Brewed: ${click_count}`;
+}
