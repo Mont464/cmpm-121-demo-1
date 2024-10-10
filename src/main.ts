@@ -10,7 +10,14 @@ header.innerHTML = gameName;
 app.append(header);
 
 const clicker_button = document.createElement("button");
-clicker_button.innerHTML = "⚗️BREW⚗️";
+clicker_button.style.backgroundColor = "#9733ff";
+clicker_button.style.width = "150px";
+clicker_button.style.height = "150px";
+clicker_button.style.borderRadius = "50%";
+clicker_button.innerHTML = "⚗️<br>⚗️BREW⚗️<br>⚗️";
+clicker_button.style.textAlign = "center";
+clicker_button.style.fontSize = "20px";
+
 app.append(clicker_button);
 
 let click_count: number = 0;
