@@ -39,6 +39,7 @@ growth_upgrade_button.onclick = () => {
   if (click_count >= 10) {
     click_count -= 10;
     auto_growth += 0.1;
+    auto_growth_report.innerHTML = `Current Auto Generation Level: ${auto_growth} Flasks/sec`;
     upgrade_a_count++;
     growth_upgrade_button.innerHTML = `10 Flasks🧪: Hire Goblin Apprentice<br>
     Increases Auto Generation by 0.1x<br>
@@ -58,6 +59,7 @@ greater_upgrade_button.onclick = () => {
   if (click_count >= 100) {
     click_count -= 100;
     auto_growth += 2;
+    auto_growth_report.innerHTML = `Current Auto Generation Level: ${auto_growth} Flasks/sec`;
     upgrade_b_count++;
     greater_upgrade_button.innerHTML = `100 Flasks🧪: Hire Goblin Wizard<br>
     Increases Auto Generation by 2x<br>
@@ -77,12 +79,17 @@ major_upgrade_button.onclick = () => {
   if (click_count >= 1000) {
     click_count -= 1000;
     auto_growth += 50;
+    auto_growth_report.innerHTML = `Current Auto Generation Level: ${auto_growth} Flasks/sec`;
     upgrade_c_count++;
     major_upgrade_button.innerHTML = `1000 Flasks🧪: Buy Mystic Catalyst<br>
     Increases Auto Generation by 50x<br>
     Current Level: ${upgrade_c_count}`;
   }
 };
+
+const auto_growth_report = document.createElement("div");
+auto_growth_report.innerHTML = `Current Auto Generation Level: ${auto_growth} Flasks/sec`;
+app.append(auto_growth_report);
 
 let previous_time = performance.now();
 let current_time = 0;
