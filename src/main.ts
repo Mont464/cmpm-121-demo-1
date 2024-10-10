@@ -20,7 +20,7 @@ clicker_button.style.fontSize = "20px";
 
 app.append(clicker_button);
 
-let click_count: number = 1000;
+let click_count: number = 0;
 const click_report = document.createElement("div");
 click_report.innerHTML = `Flasks Brewed: ${click_count}`;
 app.append(click_report);
