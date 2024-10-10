@@ -20,7 +20,7 @@ clicker_button.style.fontSize = "20px";
 
 app.append(clicker_button);
 
-let click_count: number = 0;
+let click_count: number = 1000;
 const click_report = document.createElement("div");
 click_report.innerHTML = `Flasks Brewed: ${click_count}`;
 app.append(click_report);
@@ -34,69 +34,67 @@ clicker_button.onclick = () => {
   incrementCounter(1);
 };
 
+
 let auto_growth: number = 0;
 
-let upgrade_a_price = 10;
-let upgrade_a_count = 0;
+interface Item {
+  name: string,
+  cost: number,
+  rate: number,
+  up_count: number
+};
+
+const availableItems : Item[] = [
+  {name: "Goblin Apprentice", cost: 10, rate: 0.1, up_count: 0},
+  {name: "Goblin Wizard", cost: 100, rate: 2, up_count: 0},
+  {name: "Mystic Catalyst", cost: 1000, rate: 50, up_count: 0},
+];
+
 const growth_upgrade_button = document.createElement("button");
-growth_upgrade_button.innerHTML = `${upgrade_a_price.toFixed(2)} Flasks🧪: Hire Goblin Apprentice<br>Increases Auto Generation by 0.1x<br>Current Level: ${upgrade_a_count}`;
+growth_upgrade_button.innerHTML = `${availableItems[0].cost.toFixed(2)} Flasks🧪: Hire ${availableItems[0].name}<br>Increases Auto Generation by ${availableItems[0].rate}<br>Current Level: ${availableItems[0].up_count}`;
 app.append(growth_upgrade_button);
 growth_upgrade_button.disabled = true;
 
 growth_upgrade_button.onclick = () => {
-  if (click_count >= upgrade_a_price) {
-    click_count -= upgrade_a_price;
-    upgrade_a_price *= 1.15;
-    auto_growth += 0.1;
-    auto_growth_report.innerHTML = `Current Auto Generation Level: ${auto_growth} Flasks/sec`;
-    upgrade_a_count++;
-    growth_upgrade_button.innerHTML = `${upgrade_a_price.toFixed(2)} Flasks🧪: Hire Goblin Apprentice<br>
-    Increases Auto Generation by 0.1x<br>
-    Current Level: ${upgrade_a_count}`;
+  if (click_count >= availableItems[0].cost) {
+    click_count -= availableItems[0].cost;
+    availableItems[0].cost *= 1.15;
+    auto_growth += availableItems[0].rate;
+    auto_growth_report.innerHTML = `Current Auto Generation Level: ${auto_growth.toFixed(1)} Flasks/sec`;
+    availableItems[0].up_count++;
+    growth_upgrade_button.innerHTML = `${availableItems[0].cost.toFixed(2)} Flasks🧪: Hire ${availableItems[0].name}<br>Increases Auto Generation by ${availableItems[0].rate}<br>Current Level: ${availableItems[0].up_count}`;;
   }
 };
 
-let upgrade_b_price = 100;
-let upgrade_b_count = 0;
 const greater_upgrade_button = document.createElement("button");
-greater_upgrade_button.innerHTML = `${upgrade_b_price.toFixed(2)} Flasks🧪: Hire Goblin Wizard<br>
-Increases Auto Generation by 2x<br>
-Current Level: ${upgrade_b_count}`;
+greater_upgrade_button.innerHTML = `${availableItems[1].cost.toFixed(2)} Flasks🧪: Hire ${availableItems[1].name}<br>Increases Auto Generation by ${availableItems[1].rate}<br>Current Level: ${availableItems[1].up_count}`;
 app.append(greater_upgrade_button);
 greater_upgrade_button.disabled = true;
 
 greater_upgrade_button.onclick = () => {
-  if (click_count >= upgrade_b_price) {
-    click_count -= upgrade_b_price;
-    upgrade_b_price *= 1.15;
-    auto_growth += 2;
-    auto_growth_report.innerHTML = `Current Auto Generation Level: ${auto_growth} Flasks/sec`;
-    upgrade_b_count++;
-    greater_upgrade_button.innerHTML = `${upgrade_b_price.toFixed(2)} Flasks🧪: Hire Goblin Wizard<br>
-    Increases Auto Generation by 2x<br>
-    Current Level: ${upgrade_b_count}`;
+  if (click_count >= availableItems[1].cost) {
+    click_count -= availableItems[1].cost;
+    availableItems[1].cost *= 1.15;
+    auto_growth += availableItems[1].rate;
+    auto_growth_report.innerHTML = `Current Auto Generation Level: ${auto_growth.toFixed(1)} Flasks/sec`;
+    availableItems[1].up_count++;
+    greater_upgrade_button.innerHTML = `${availableItems[1].cost.toFixed(2)} Flasks🧪: Hire ${availableItems[1].name}<br>Increases Auto Generation by ${availableItems[1].rate}<br>Current Level: ${availableItems[1].up_count}`;
   }
 };
 
-let upgrade_c_price = 1000;
-let upgrade_c_count = 0;
 const major_upgrade_button = document.createElement("button");
-major_upgrade_button.innerHTML = `${upgrade_c_price.toFixed(2)} Flasks🧪: Buy Mystic Catalyst<br>
-    Increases Auto Generation by 50x<br>
-    Current Level: ${upgrade_c_count}`;
+major_upgrade_button.innerHTML = `${availableItems[2].cost.toFixed(2)} Flasks🧪: Buy ${availableItems[2].name}<br>Increases Auto Generation by ${availableItems[2].rate}<br>Current Level: ${availableItems[2].up_count}`;
 app.append(major_upgrade_button);
 major_upgrade_button.disabled = true;
 
 major_upgrade_button.onclick = () => {
-  if (click_count >= upgrade_c_price) {
-    click_count -= upgrade_c_price;
-    upgrade_c_price *= 1.15;
-    auto_growth += 50;
-    auto_growth_report.innerHTML = `Current Auto Generation Level: ${auto_growth} Flasks/sec`;
-    upgrade_c_count++;
-    major_upgrade_button.innerHTML = `${upgrade_c_price.toFixed(2)} Flasks🧪: Buy Mystic Catalyst<br>
-    Increases Auto Generation by 50x<br>
-    Current Level: ${upgrade_c_count}`;
+  if (click_count >= availableItems[2].cost) {
+    click_count -= availableItems[2].cost;
+    availableItems[2].cost *= 1.15;
+    auto_growth += availableItems[2].rate;
+    auto_growth_report.innerHTML = `Current Auto Generation Level: ${auto_growth.toFixed(1)} Flasks/sec`;
+    availableItems[2].up_count++;
+    major_upgrade_button.innerHTML = `${availableItems[2].cost.toFixed(2)} Flasks🧪: Hire ${availableItems[2].name}<br>Increases Auto Generation by ${availableItems[2].rate}<br>Current Level: ${availableItems[2].up_count}`;
   }
 };
 
@@ -111,19 +109,19 @@ const autoIncrement = function () {
   incrementCounter(auto_growth * ((current_time - previous_time) / 1000));
   previous_time = current_time;
 
-  if (click_count >= upgrade_a_price) {
+  if (click_count >= availableItems[0].cost) {
     growth_upgrade_button.disabled = false;
   } else {
     growth_upgrade_button.disabled = true;
   }
 
-  if (click_count >= upgrade_b_price) {
+  if (click_count >= availableItems[1].cost) {
     greater_upgrade_button.disabled = false;
   } else {
     greater_upgrade_button.disabled = true;
   }
 
-  if (click_count >= upgrade_c_price) {
+  if (click_count >= availableItems[2].cost) {
     major_upgrade_button.disabled = false;
   } else {
     major_upgrade_button.disabled = true;
