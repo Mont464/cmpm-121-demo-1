@@ -41,20 +41,22 @@ interface Item {
   cost: number;
   rate: number;
   up_count: number;
+  description: string;
 }
 
 const availableItems: Item[] = [
-  { name: "Goblin Gardener", cost: 10, rate: 0.1, up_count: 0 },
-  { name: "Goblin ", cost: 50, rate: 0.5, up_count: 0 },
-  { name: "Goblin Wizard", cost: 100, rate: 2, up_count: 0 },
-  { name: "Mystic Catalyst", cost: 1000, rate: 50, up_count: 0 },
-  
+  { name: "Goblin Gardener", cost: 10, rate: 0.1, up_count: 0, description: "Resourceful goblin that gathers plants for new potions" },
+  { name: "Golden Cauldron", cost: 50, rate: 0.5, up_count: 0, description: "More Cauldrons = More Potions" },
+  { name: "Goblin Wizard", cost: 100, rate: 2, up_count: 0, description: "Magial maniacs that can clone resources and potions" },
+  { name: "Mystic Catalyst", cost: 1000, rate: 50, up_count: 0, description: "The most valuable item in alchemy" },
+  { name: "Gonk, the Omnipotent Goblin", cost: 10000, rate: 150, up_count: 0, description: "Gonk is he. Gonk help" },
 ];
 
 const buttons: HTMLButtonElement[] = [];
-for(let i = 0; i < availableItems.length; i++) {
+for (let i = 0; i < availableItems.length; i++) {
   buttons[i] = document.createElement("button");
-  buttons[i].innerHTML = `${availableItems[i].cost.toFixed(2)} Flasks🧪: Hire ${availableItems[i].name}<br>Increases Auto Generation by ${availableItems[i].rate}<br>Current Level: ${availableItems[i].up_count}`;
+  buttons[i].innerHTML =
+    `${availableItems[i].cost.toFixed(2)} Flasks🧪: Get ${availableItems[i].name}<br>${availableItems[i].description}<br>Increases Auto Generation by ${availableItems[i].rate}<br>Current Level: ${availableItems[i].up_count}`;
   app.append(buttons[i]);
   buttons[i].disabled = true;
 
@@ -65,7 +67,8 @@ for(let i = 0; i < availableItems.length; i++) {
       auto_growth += availableItems[i].rate;
       auto_growth_report.innerHTML = `Current Auto Generation Level: ${auto_growth.toFixed(1)} Flasks/sec`;
       availableItems[i].up_count++;
-      buttons[i].innerHTML = `${availableItems[i].cost.toFixed(2)} Flasks🧪: Hire ${availableItems[i].name}<br>Increases Auto Generation by ${availableItems[i].rate}<br>Current Level: ${availableItems[i].up_count}`;
+      buttons[i].innerHTML =
+        `${availableItems[i].cost.toFixed(2)} Flasks🧪: Hire ${availableItems[i].name}<br>Increases Auto Generation by ${availableItems[i].rate}<br>Current Level: ${availableItems[i].up_count}`;
     }
   };
 }
@@ -81,7 +84,7 @@ const autoIncrement = function () {
   incrementCounter(auto_growth * ((current_time - previous_time) / 1000));
   previous_time = current_time;
 
-  for(let i = 0; i < buttons.length; i++) {
+  for (let i = 0; i < buttons.length; i++) {
     if (click_count >= availableItems[i].cost) {
       buttons[i].disabled = false;
     } else {
