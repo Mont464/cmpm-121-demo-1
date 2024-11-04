@@ -50,7 +50,7 @@ function createItem(
   name: string,
   cost: number,
   rate: number,
-  description: string
+  description: string,
 ): Item {
   return {
     name,
@@ -66,21 +66,21 @@ const availableItems: Item[] = [
     "Goblin Gardener",
     10,
     0.1,
-    "Resourceful goblin that gathers plants for new potions"
+    "Resourceful goblin that gathers plants for new potions",
   ),
   createItem("Goblin Cauldron", 50, 0.5, "More Cauldrons = More Potions"),
   createItem(
     "Goblin Wizard",
     100,
     2,
-    "Magial maniacs that can clone resources and potions"
+    "Magial maniacs that can clone resources and potions",
   ),
   createItem("Mystic Catalyst", 1000, 50, "The most valuable item in alchemy"),
   createItem(
     "Gonk, the Omnipotent Goblin",
     10000,
     150,
-    "Gonk is he. Gonk help"
+    "Gonk is he. Gonk help",
   ),
 ];
 
@@ -88,7 +88,7 @@ const buttons: HTMLButtonElement[] = [];
 const buttonCostScalar: number = 1.15;
 for (let i = 0; i < availableItems.length; i++) {
   buttons[i] = createButton(
-    `${availableItems[i].cost.toFixed(2)} Flasks🧪: Get ${availableItems[i].name}<br>${availableItems[i].description}<br>Increases Auto Generation by ${availableItems[i].rate}<br>Current Level: ${availableItems[i].upgradeCount}`
+    `${availableItems[i].cost.toFixed(2)} Flasks🧪: Get ${availableItems[i].name}<br>${availableItems[i].description}<br>Increases Auto Generation by ${availableItems[i].rate}<br>Current Level: ${availableItems[i].upgradeCount}`,
   );
   buttons[i].disabled = true;
 
