@@ -25,7 +25,9 @@ clickerButton.style.textAlign = "center";
 clickerButton.style.fontSize = "20px";
 
 let clickCount: number = 0;
-const clickReport = createButton(`Flasks Brewed: ${clickCount}`);
+const clickReport = document.createElement("div");
+clickReport.innerHTML = `Flasks Brewed: ${clickCount}`;
+app.append(clickReport);
 
 const incrementCounter = function (n: number) {
   clickCount += n;
