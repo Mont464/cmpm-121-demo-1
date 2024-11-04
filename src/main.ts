@@ -120,7 +120,7 @@ const autoIncrement = function () {
   requestAnimationFrame(autoIncrement);
 };
 
-const decideButtonEnable  = function() {
+const decideButtonEnable = function () {
   for (let i = 0; i < buttons.length; i++) {
     if (clickCount >= availableItems[i].cost) {
       buttons[i].disabled = false;
