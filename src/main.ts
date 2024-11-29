@@ -7,6 +7,7 @@ document.title = gameName;
 
 const header = document.createElement("h1");
 header.innerHTML = gameName;
+header.setAttribute("style", "vertical-align: text-top; -webkit-text-stroke: 2px #006600;color: #66ff99; font-style: italic; font-family: lucida-handwriting; margin-top: 30px; padding-top: 20px;");
 app.append(header);
 
 const createButton = function (message: string) {
@@ -75,7 +76,7 @@ const availableItems: Item[] = [
     "Goblin Wizard",
     100,
     2,
-    "Magial maniacs that can clone resources and potions",
+    "Magical maniacs that can clone resources and potions",
   ),
   createItem("Mystic Catalyst", 1000, 50, "The most valuable item in alchemy"),
   createItem(
@@ -86,13 +87,47 @@ const availableItems: Item[] = [
   ),
 ];
 
+// Create a tooltip element
+const tooltip = document.createElement("div");
+tooltip.style.position = "absolute";
+tooltip.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+tooltip.style.color = "white";
+tooltip.style.padding = "10px";
+tooltip.style.borderRadius = "5px";
+tooltip.style.fontSize = "14px";
+tooltip.style.pointerEvents = "none"; // So it doesn't block interaction
+tooltip.style.visibility = "hidden"; // Hide by default
+app.append(tooltip);
+
 const buttons: HTMLButtonElement[] = [];
 const buttonCostScalar: number = 1.15;
 for (let i = 0; i < availableItems.length; i++) {
   buttons[i] = createButton(
-    `${availableItems[i].cost.toFixed(2)} Flasks🧪: Get ${availableItems[i].name}<br>${availableItems[i].description}<br>Increases Auto Generation by ${availableItems[i].rate}<br>Current Level: ${availableItems[i].upgradeCount}`,
+    `<strong>${availableItems[i].cost.toFixed(2)} Flasks🧪: Get ${availableItems[i].name}</strong><br>Current Level: ${availableItems[i].upgradeCount}`,
   );
   buttons[i].disabled = true;
+
+  // Add mouseenter event to show tooltip
+  buttons[i].addEventListener("mouseenter", (event) => {
+    tooltip.innerHTML = `
+      ${availableItems[i].description}<br>
+      <em>Generates: ${availableItems[i].rate} Flasks/sec</em>
+    `;
+    tooltip.style.top = `${event.clientY + 10}px`; // Adjust position near mouse
+    tooltip.style.left = `${event.clientX + 10}px`;
+    tooltip.style.visibility = "visible"; // Show tooltip
+  });
+
+  // Add mousemove event to follow the cursor
+  buttons[i].addEventListener("mousemove", (event) => {
+    tooltip.style.top = `${event.clientY + 10}px`; // Follow cursor
+    tooltip.style.left = `${event.clientX + 10}px`;
+  });
+
+  // Add mouseleave event to hide tooltip
+  buttons[i].addEventListener("mouseleave", () => {
+    tooltip.style.visibility = "hidden"; // Hide tooltip when leaving
+  });
 
   buttons[i].onclick = () => {
     if (clickCount >= availableItems[i].cost) {
