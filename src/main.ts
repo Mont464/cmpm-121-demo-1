@@ -7,7 +7,10 @@ document.title = gameName;
 
 const header = document.createElement("h1");
 header.innerHTML = gameName;
-header.setAttribute("style", "vertical-align: text-top; -webkit-text-stroke: 2px #006600;color: #66ff99; font-style: italic; font-family: lucida-handwriting; margin-top: 30px; padding-top: 20px;");
+header.setAttribute(
+  "style",
+  "vertical-align: text-top; -webkit-text-stroke: 2px #006600;color: #66ff99; font-style: italic; font-family: lucida-handwriting; margin-top: 30px; padding-top: 20px;",
+);
 app.append(header);
 
 const createButton = function (message: string) {
