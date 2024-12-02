@@ -1,5 +1,5 @@
 import "./style.css";
-// Visual Improvement examples: 
+// Visual Improvement examples:
 //   Background + Text change: https://cheristic.github.io/cmpm-121-demo-1/
 //   Upgrade button pop-up while hovering: https://elliem-gd.github.io/cmpm-121-demo-1/
 const app: HTMLDivElement = document.querySelector("#app")!;
